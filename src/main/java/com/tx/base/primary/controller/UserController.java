@@ -5,12 +5,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tx.base.primary.entity.User;
-import com.tx.base.utils.MD5;
 import com.tx.base.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,7 +60,8 @@ public class UserController {
     @ApiOperation(value = "新增管理用户")
     @PostMapping("save")
     public R save(@RequestBody User user) {
-        user.setPassword(MD5.encrypt(user.getPassword()));
+        BCryptPasswordEncoder bp = new BCryptPasswordEncoder();
+        user.setPassword(bp.encode(user.getPassword()));
         userService.save(user);
         return R.ok();
     }
