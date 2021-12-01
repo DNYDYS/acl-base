@@ -2,12 +2,14 @@
 
 ### 2021-12-01
 
-- 修改项目，使项目可以真正的单体使用
+- 修改项目，完善readme文档，方便后续阅读
 - 向git仓库中添加sql文件
-- 修改完善readme文件
-- 修改swagger配置，修复swagger打不卡的错误
-- swagger接口地址：http://localhost:8080/doc.html
-- 后端接口修复，添加对应的注释信息
+- 向git仓库中添加postman配置信息
+- 修改swagger配置，修复swagger打不开的错误
+- TokenWebSecurityConfig 配置信息中放行swagger信息接口
+- swagger文档地址：http://localhost:8080/doc.html
+- 后端接口修复，添加对应的swagger注释信息
+- 
 
 ------
 
