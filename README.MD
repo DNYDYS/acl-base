@@ -9,7 +9,7 @@
 - TokenWebSecurityConfig 配置信息中放行swagger信息接口
 - swagger文档地址：http://localhost:8080/doc.html
 - 后端接口修复，添加对应的swagger注释信息
-- 
+- 修改mysql连接信息，不验证ssl
 
 ------
 
