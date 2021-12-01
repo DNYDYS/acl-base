@@ -1,5 +1,5 @@
 
-## 单体项目脚手架 SpringBoot+Security+Jwt
+## 前后端分离后端模块脚手架 SpringBoot+Security+Jwt
 <p align="left">
 	<a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.html">
 		<img src="https://img.shields.io/:license-apache-blue.svg" ></img>
