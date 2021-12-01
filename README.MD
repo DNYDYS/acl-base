@@ -16,6 +16,12 @@
     <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
 		<img src="https://img.shields.io/badge/MybatisPlus-3.0-yellow.svg" ></img>
 	</a>
+	<a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+		<img src="https://img.shields.io/badge/Redis-3.0-pink.svg" ></img>
+	</a>
+		<a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+		<img src="https://img.shields.io/badge/Jwt-jjwt-red.svg" ></img>
+	</a>
 </p>
 
 
