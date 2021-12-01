@@ -1,3 +1,21 @@
+<p align="center">
+	<a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.html">
+		<img src="https://img.shields.io/:license-apache-blue.svg" ></img>
+	</a>
+	<a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+		<img src="https://img.shields.io/badge/JDK-1.8+-green.svg" ></img>
+	</a>
+    <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+		<img src="https://img.shields.io/badge/SpringBoot-2.3.4-blue.svg" ></img>
+	</a>
+    <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+		<img src="https://img.shields.io/badge/Mysql-5.7-green.svg" ></img>
+	</a>
+    <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+		<img src="https://img.shields.io/badge/MybatisPlus-3.0-yellow.svg" ></img>
+	</a>
+</p>
+
 ## 单体项目脚手架 SpringBoot+Security+Jwt
 
 ### 2021-12-01
