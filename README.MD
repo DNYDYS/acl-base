@@ -10,6 +10,7 @@
 - swagger文档地址：http://localhost:8080/doc.html
 - 后端接口修复，添加对应的swagger注释信息
 - 修改mysql连接信息，不验证ssl
+- 修改新增用户功能
 
 ------
 

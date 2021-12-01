@@ -62,6 +62,7 @@ public class UserController {
     public R save(@RequestBody User user) {
         BCryptPasswordEncoder bp = new BCryptPasswordEncoder();
         user.setPassword(bp.encode(user.getPassword()));
+        // 这里要判断用户名是否重复
         userService.save(user);
         return R.ok();
     }
