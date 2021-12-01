@@ -1,0 +1,51 @@
+{
+	"info": {
+		"_postman_id": "767fa863-3d5b-4e44-b8e7-199daeb15576",
+		"name": "base系统",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "登录接口",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/admin/login"
+			},
+			"response": []
+		},
+		{
+			"name": "获取个人信息",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAAKtWKi5NUrJSSkzJzcxT0lFKrShQsjI0M7YwMTa1NDCrBQClQdQJIAAAAA.ISjMPqBELAb6MSoB_m_KIALfRWykuk0tav3jNaxS1se_97EyvwgZudnNr4DO0ArjTGH6UbrBwploBZ6lzB_yfQ",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8080/index/info"
+			},
+			"response": []
+		},
+		{
+			"name": "注销登录",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/admin/logout"
+			},
+			"response": []
+		}
+	]
+}
