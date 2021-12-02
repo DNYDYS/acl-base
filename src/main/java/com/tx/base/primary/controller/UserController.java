@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * <p>
  * 用户表 前端控制器
- * </p>
- *
  * @author testjava
  * @since 2020-01-12
  */

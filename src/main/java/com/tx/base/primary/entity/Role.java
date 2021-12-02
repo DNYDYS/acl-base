@@ -9,10 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- * 
- * </p>
- *
+ * 角色表
  * @author testjava
  * @since 2020-01-12
  */

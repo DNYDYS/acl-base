@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 认证授权用户类
+ */
 @Data
 public class SecurityUser implements UserDetails {
 

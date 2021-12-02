@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * <p>
  * 权限 菜单管理
- * </p>
  * @author testjava
  * @since 2020-01-12
  */

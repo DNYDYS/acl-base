@@ -11,10 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- * 角色权限
- * </p>
- *
+ * 角色权限-中间表
  * @author testjava
  * @since 2020-01-12
  */

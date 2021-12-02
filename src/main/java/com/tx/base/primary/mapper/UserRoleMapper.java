@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.tx.base.primary.entity.UserRole;
 
 /**
- * <p>
- *  Mapper 接口
- * </p>
- *
+ * Mapper 接口
  * @author testjava
  * @since 2020-01-12
  */

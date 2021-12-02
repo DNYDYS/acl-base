@@ -6,6 +6,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * 给对象添加默认值
+ */
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override

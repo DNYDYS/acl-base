@@ -11,10 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- * 
- * </p>
- *
+ * 用户角色-中间实体
  * @author testjava
  * @since 2020-01-12
  */
@@ -47,6 +44,4 @@ public class UserRole implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
-
-
 }

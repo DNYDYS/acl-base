@@ -20,5 +20,4 @@ public interface IndexService {
      * @return
      */
     List<JSONObject> getMenu(String username);
-
 }

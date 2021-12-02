@@ -11,10 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <p>
- * 用户表
- * </p>
- *
+ * 用户实体
  * @author testjava
  * @since 2020-01-12
  */

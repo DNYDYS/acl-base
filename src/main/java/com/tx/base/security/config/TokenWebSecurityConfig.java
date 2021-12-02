@@ -13,7 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
- * Security核心配置类
+ * @description: --Security核心配置类
+ * @author：Bing
+ * @date：2021/12/1 16:51
+ * @version：1.0
  */
 @Configuration
 @EnableWebSecurity
