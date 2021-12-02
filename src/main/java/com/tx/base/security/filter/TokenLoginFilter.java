@@ -1,6 +1,7 @@
 package com.tx.base.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tx.base.exception.GuliException;
 import com.tx.base.primary.entity.SecurityUser;
 import com.tx.base.primary.entity.User;
 import com.tx.base.utils.R;
@@ -61,6 +62,11 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         try {
             //根据流获取表单数据
             User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
+            String captcha = user.getCaptcha();
+            String redisCaptcha = (String) redisTemplate.opsForValue().get("123");
+            if (!captcha.equals(redisCaptcha)) {
+                throw new GuliException(40001, "你输入的验证码错误！");
+            }
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>()));
         } catch (IOException e) {

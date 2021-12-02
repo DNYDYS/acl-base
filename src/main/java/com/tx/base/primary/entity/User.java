@@ -19,7 +19,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("acl_user")
-@ApiModel(value="User对象", description="用户表")
+@ApiModel(value = "User对象", description = "用户表")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +27,10 @@ public class User implements Serializable {
     @ApiModelProperty(value = "会员id")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
+
+    @ApiModelProperty(value = "验证码")
+    @TableField(exist = false)
+    private String captcha;
 
     @ApiModelProperty(value = "微信openid")
     private String username;

@@ -103,6 +103,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/swagger-resources","/v2/api-docs", "/webjars/**", "/index/unAuth", "/doc.html","/admin/user/save");
+        web.ignoring().antMatchers("/swagger-resources","/v2/api-docs", "/webjars/**", "/index/unAuth",
+                "/doc.html","/admin/user/save","/admin/user/getVerificationCode");
     }
 }
