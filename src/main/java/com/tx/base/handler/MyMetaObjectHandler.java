@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
+ * 前端传值添加默认值
  * 给对象添加默认值
  */
 @Component

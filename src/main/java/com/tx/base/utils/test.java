@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @version：1.0
  */
 public class test {
-
     public static void main(String[] args) {
         BCryptPasswordEncoder bp = new BCryptPasswordEncoder();
         String encode = bp.encode("123456");
