@@ -79,9 +79,13 @@
 
 请求地址：http://localhost:8080/admin/login
 
-提交方式：post
+提交方式：POST
 
-数据格式：json
+consumes ["application/json"]
+
+produces ["*/*"]
+
+接口示例: 
 
 ```
 {
@@ -89,13 +93,32 @@
     "password": "123456"
 }
 ```
+**User对象**
 
-获取当前用户信息接口：
+| 参数名称    | 参数说明                                    | 请求类型 | 是否必须 | 数据类型          |
+| ----------- | ------------------------------------------- | -------- | -------- | ----------------- |
+| captcha     | 验证码                                      | body     | false    | string            |
+| gmtCreate   | 创建时间                                    | body     | false    | string(date-time) |
+| gmtModified | 更新时间                                    | body     | false    | string(date-time) |
+| id          | 会员id                                      | body     | false    | string            |
+| isDeleted   | 逻辑删除 1（true）已删除， 0（false）未删除 | body     | false    | boolean           |
+| nickName    | 昵称                                        | body     | false    | string            |
+| password    | 密码                                        | body     | false    | string            |
+| salt        | 用户头像                                    | body     | false    | string            |
+| token       | 用户签名                                    | body     | false    | string            |
+| username    | 微信openid                                  | body     | false    | string            |
+
+
+### 获取当前用户信息：
 
 请求地址：http://localhost:8080/index/info
 
-提交方式：get
+提交方式：GET
 
-请求头Header:  toke: 获取到的token值
+consumes `["application/json"]`
+
+produces `["*/*"]`
+
+请求头Header:  toke:获取到的token值
 
 其余接口可以通过api文档查看。
