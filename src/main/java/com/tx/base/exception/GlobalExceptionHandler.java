@@ -1,4 +1,4 @@
-package com.tx.base.exceptionhandler;
+package com.tx.base.exception;
 
 import com.tx.base.utils.R;
 import lombok.extern.slf4j.Slf4j;
@@ -42,9 +42,9 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(com.tx.base.exceptionhandler.GuliException.class)
+    @ExceptionHandler(com.tx.base.exception.GuliException.class)
     @ResponseBody //为了返回数据
-    public R error(com.tx.base.exceptionhandler.GuliException e) {
+    public R error(com.tx.base.exception.GuliException e) {
         log.error(e.getMessage());
         e.printStackTrace();
         return R.error().code(e.getCode()).message(e.getMsg());
