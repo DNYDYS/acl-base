@@ -1,20 +1,31 @@
 package com.tx.base.security.security;
 
-import io.jsonwebtoken.CompressionCodecs;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.alibaba.fastjson.JSONObject;
+import com.tx.base.primary.entity.User;
+import io.jsonwebtoken.*;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.function.Function;
 
 /**
+ * Jwt工具类
  * token操作工具类
  */
 @Component
 public class TokenManager {
-    //token有效时长 单位 毫秒
-    private long tokenEcpiration = 24 * 60 * 60 * 1000;
-    //编码秘钥
+    private static final Logger logger = LoggerFactory.getLogger(TokenManager.class);
+    /**
+     * token有效时长 单位 毫秒
+     * token 过期时间, 单位: 秒. 这个值表示 30 天
+     */
+    private long tokenEcpiration = 30 * 24 * 60 * 60 * 1000;
+    /**
+     * 编码秘钥 太简单 后期要更改
+     */
     private String tokenSignKey = "123456";
 
     /**
@@ -42,7 +53,61 @@ public class TokenManager {
         return userinfo;
     }
 
-    //3 删除token
+    /**
+     * 删除token
+     * @param token
+     */
     public void removeToken(String token) {
+    }
+
+    /**
+     * 获取过期时间
+     * @return
+     */
+    public Date getExpirationDateFromToken(String token) {
+        return getClaimFromToken(token, Claims::getExpiration);
+    }
+
+    /**
+     * 从token中获取
+     * @param token
+     * @param claimsResolver
+     * @param <T>
+     * @return
+     */
+    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        Claims claims = getAllClaimsFromToken(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims getAllClaimsFromToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(tokenSignKey)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    /**
+     * 验证token是否有效
+     * @param token
+     * @return
+     */
+    public Boolean validateToken(String token) {
+        String userInfo;
+        try {
+            userInfo = getUserInfoFromToken(token);
+        } catch (ExpiredJwtException jwtException) {
+            logger.error("token过期:{}", jwtException.getMessage());
+            return false;
+        }
+
+        if (StringUtils.isBlank(userInfo)) {
+            return false;
+        }
+        User user = JSONObject.parseObject(userInfo, User.class);
+        if (user != null && StringUtils.isBlank(user.getUsername())) {
+            return false;
+        }
+        return true;
     }
 }

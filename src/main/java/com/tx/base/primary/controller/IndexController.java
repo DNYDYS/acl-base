@@ -2,6 +2,7 @@ package com.tx.base.primary.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tx.base.primary.service.IndexService;
+import com.tx.base.security.security.TokenManager;
 import com.tx.base.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -63,6 +64,7 @@ public class IndexController {
         return R.ok();
     }
 
+    private TokenManager tokenManager;
     /**
      * 当前接口不需要认证
      * @return

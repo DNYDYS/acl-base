@@ -14,8 +14,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -60,6 +62,10 @@ public class TokenAuthFilter extends BasicAuthenticationFilter {
         //从header获取token
         String token = request.getHeader("token");
         if (token != null) {
+            Date expirationDateFromToken = tokenManager.getExpirationDateFromToken(token);
+            SimpleDateFormat sd = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String format = sd.format(expirationDateFromToken);
+            logger.info("当前token过期时间："+format);
             //从token获取用户名
             String username = tokenManager.getUserInfoFromToken(token);
             //从redis获取对应权限列表

@@ -6,7 +6,10 @@ import org.springframework.http.MediaType;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-// 进行数据返回
+
+/**
+ * 进行数据返回
+ */
 public class ResponseUtil {
 
     public static void out(HttpServletResponse response, R r) {

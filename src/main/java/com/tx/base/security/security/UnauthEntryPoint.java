@@ -17,7 +17,7 @@ public class UnauthEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
-        //直接返回信息
-        ResponseUtil.out(response,R.error().message("---未认证---"));
+        //  直接返回信息
+        ResponseUtil.out(response,R.error().message("---当前接口未授权---"));
     }
 }
