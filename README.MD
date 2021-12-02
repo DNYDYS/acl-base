@@ -31,7 +31,7 @@
 - 新增获取验证码接口，用户获取验证码
 - User实体新增验证码字段
 - 用户登录接口做验证码验证
-- 
+- 注销登录实现，解决权限列表判空bug
 - 
 
 ### 2021-12-01
@@ -108,6 +108,16 @@ produces ["*/*"]
 | token       | 用户签名                                    | body     | false    | string            |
 | username    | 微信openid                                  | body     | false    | string            |
 
+### 注销登录
+请求地址：http://localhost:8080/index/logout
+
+提交方式：GET
+
+consumes ["application/json"]
+
+produces ["*/*"]
+
+请求头Header:  toke:获取到的token值
 
 ### 获取当前用户信息：
 

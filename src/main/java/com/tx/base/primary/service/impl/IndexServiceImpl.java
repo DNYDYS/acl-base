@@ -1,12 +1,14 @@
 package com.tx.base.primary.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tx.base.exception.GuliException;
 import com.tx.base.primary.entity.Role;
 import com.tx.base.primary.entity.User;
 import com.tx.base.primary.service.IndexService;
 import com.tx.base.primary.service.PermissionService;
 import com.tx.base.primary.service.RoleService;
 import com.tx.base.primary.service.UserService;
+import com.tx.base.utils.ResultCodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -41,7 +43,8 @@ public class IndexServiceImpl implements IndexService {
         User user = userService.selectByUsername(username);
         if (null == user) {
             // 自定义异常返回
-            //throw new GuliException(ResultCodeEnum.FETCH_USERINFO_ERROR);
+            // enum使用案例
+            throw new GuliException(ResultCodeEnum.USER_NULL.getCode(), ResultCodeEnum.USER_NULL.getMessage());
         }
         //根据用户id查询获取角色
         List<Role> roleList = roleService.selectRoleByUserId(user.getId());

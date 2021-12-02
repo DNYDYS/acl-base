@@ -16,22 +16,24 @@ public enum ResultCodeEnum {
     USER_ACCOUNT_ERROR(402, ResultMessageEnum.USER_ACCOUNT_ERROR.getMessage()),
     USER_NOT_FOUND(401, ResultMessageEnum.USER_NOT_FOUND.getMessage()),
     GATEWAY_ERROR(522, ResultMessageEnum.GATEWAY_ERROR.getMessage()),
+    USER_NULL(4000,"当前用户为空"),
+    TOKEN_EXPIRED(40001,"当前token已过期，请重新获取"),
     SERVICE_INSTANCE_NOT_FOUND(523, ResultMessageEnum.SERVICE_INSTANCE_NOT_FOUND.getMessage());
     /**
      * 状态码
      */
-    private Long code;
+    private Integer code;
     /**
      * 状态信息
      */
     private String message;
 
-    ResultCodeEnum(long code, String message) {
+    ResultCodeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public Long getCode() {
+    public Integer getCode() {
         return code;
     }
 
