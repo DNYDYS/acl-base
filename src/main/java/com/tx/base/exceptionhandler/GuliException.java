@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 异常状态实体类，返回异常状态信息
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
