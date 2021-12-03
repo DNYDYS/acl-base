@@ -24,6 +24,11 @@
 	</a>
 </p>
 
+### 2021-12-03
+
+- 
+
+
 ### 2021-12-02
 
 - 重构项目名字，修改依赖版本
@@ -100,16 +105,16 @@ produces ["*/*"]
 
 | 参数名称    | 参数说明                                    | 请求类型 | 是否必须 | 数据类型          |
 | ----------- | ------------------------------------------- | -------- | -------- | ----------------- |
-| captcha     | 验证码                                      | body     | false    | string            |
+| captcha     | 验证码                                      | body     | true    | string            |
 | gmtCreate   | 创建时间                                    | body     | false    | string(date-time) |
 | gmtModified | 更新时间                                    | body     | false    | string(date-time) |
 | id          | 会员id                                      | body     | false    | string            |
 | isDeleted   | 逻辑删除 1（true）已删除， 0（false）未删除 | body     | false    | boolean           |
 | nickName    | 昵称                                        | body     | false    | string            |
-| password    | 密码                                        | body     | false    | string            |
+| password    | 密码                                        | body     | true    | string            |
 | salt        | 用户头像                                    | body     | false    | string            |
 | token       | 用户签名                                    | body     | false    | string            |
-| username    | 微信openid                                  | body     | false    | string            |
+| username    | 微信openid                                  | body     | true    | string            |
 
 ### 注销登录
 请求地址：http://localhost:8080/index/logout
