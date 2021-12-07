@@ -113,7 +113,8 @@ produces ["*/*"]
 ```
 {
     "username":"admin",
-    "password": "123456"
+    "password": "123456",
+    "captcha":"6yxp7"
 }
 ```
 
