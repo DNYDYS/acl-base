@@ -75,7 +75,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new com.tx.base.security.security.UnauthEntryPoint())//没有权限访问
                 .and().csrf().disable()
                 .authorizeRequests()
-                //.antMatchers("/swagger-resources","/v2/api-docs").permitAll()  //放行swagger路径
                 .anyRequest().authenticated()
                 //.and().formLogin().loginProcessingUrl("/index/login")
                 .and().logout().logoutUrl("/index/logout")//退出路径
@@ -103,7 +102,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/swagger-resources","/v2/api-docs", "/webjars/**", "/index/unAuth",
-                "/doc.html","/admin/user/save","/admin/user/getVerificationCode");
+        web.ignoring().antMatchers("/swagger-resources", "/v2/api-docs", "/webjars/**", "/index/unAuth",
+                "/doc.html", "/admin/user/save", "/admin/user/getVerificationCode");
     }
 }
