@@ -1,7 +1,6 @@
 package com.tx.base.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tx.base.exception.GuliException;
 import com.tx.base.primary.entity.SecurityUser;
 import com.tx.base.primary.entity.User;
 import com.tx.base.utils.R;
@@ -9,8 +8,7 @@ import com.tx.base.utils.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -64,8 +62,11 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
             User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
             String captcha = user.getCaptcha();
             String redisCaptcha = (String) redisTemplate.opsForValue().get("123");
+            logger.info("传进来的验证码：{}" + captcha);
+            logger.info("redis中存的验证码：{}" + redisCaptcha);
             if (!captcha.equals(redisCaptcha)) {
-                throw new GuliException(40001, "你输入的验证码错误！");
+                //验证码不正确
+                throw new AuthenticationServiceException("用户验证码错误!");
             }
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>()));
@@ -104,13 +105,29 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
      * 3 认证失败调用的方法
      * @param request
      * @param response
-     * @param failed
+     * @param exception
      * @throws IOException
      * @throws ServletException
      */
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
             throws IOException, ServletException {
-        logger.info("---认证失败---");
-        ResponseUtil.out(response, R.auhtError());
+        logger.info("账户-密码-验证码错误");
+        String message = exception.getMessage();
+        //if (exception instanceof LockedException) {
+        //    respBean.setMsg("账户被锁定，请联系管理员!");
+        //} else if (exception instanceof CredentialsExpiredException) {
+        //    respBean.setMsg("密码过期，请联系管理员!");
+        //} else if (exception instanceof AccountExpiredException) {
+        //    respBean.setMsg("账户过期，请联系管理员!");
+        //} else if (exception instanceof DisabledException) {
+        //    respBean.setMsg("账户被禁用，请联系管理员!");
+        //} else if (exception instanceof BadCredentialsException) {
+        //    respBean.setMsg("用户名或者密码输入错误，请重新输入!");
+        //}
+        if (exception instanceof AuthenticationServiceException) {
+            ResponseUtil.out(response, R.usernameOrPasswordError("用户验证码错误!"));
+        } else {
+            ResponseUtil.out(response, R.usernameOrPasswordError("用户名或密码错误"));
+        }
     }
 }

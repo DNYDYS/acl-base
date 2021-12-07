@@ -18,6 +18,7 @@ public class UnauthEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
         //  直接返回信息
-        ResponseUtil.out(response,R.error().message("---当前接口未授权---"));
+        String message = e.getMessage();
+        ResponseUtil.out(response,R.error().message("未授权统一返回接口"));
     }
 }

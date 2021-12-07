@@ -47,6 +47,15 @@ public class R {
         r.setMessage("---认证失败---");
         return r;
     }
+    //失败静态方法
+    public static R usernameOrPasswordError(String msg) {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(20001);
+        r.setMessage(msg);
+        return r;
+    }
+
 
     //未授权静态方法
     public static R unAuth() {

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 /**
  * @description: --Security核心配置类
@@ -21,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private com.tx.base.security.security.TokenManager tokenManager;
@@ -45,6 +47,9 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     //    this.tokenManager = tokenManager;
     //    this.redisTemplate = redisTemplate;
     //}
+    @Autowired
+    private RequestMappingHandlerMapping requestMappingHandlerMapping;
+
 
     /**
      * 配置使用认证的类
@@ -61,7 +66,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.tokenManager = tokenManager;
         this.redisTemplate = redisTemplate;
     }
-
 
     /**
      * 配置设置

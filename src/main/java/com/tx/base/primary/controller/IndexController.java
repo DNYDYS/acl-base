@@ -1,6 +1,7 @@
 package com.tx.base.primary.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.tx.base.exception.GuliException;
 import com.tx.base.primary.service.IndexService;
 import com.tx.base.security.security.TokenManager;
 import com.tx.base.utils.R;
@@ -27,6 +28,7 @@ public class IndexController {
 
     @Autowired
     private IndexService indexService;
+    private TokenManager tokenManager;
 
     /**
      * 获取登录用户信息
@@ -64,7 +66,6 @@ public class IndexController {
         return R.ok();
     }
 
-    private TokenManager tokenManager;
     /**
      * 当前接口不需要认证
      * @return
@@ -74,5 +75,11 @@ public class IndexController {
     public R unAuth() {
         System.out.println("unAuth。。。");
         return R.ok().message("当前接口没有认证，不需要token");
+    }
+
+    @ApiOperation("异常测试")
+    @GetMapping("/exception")
+    public R exception() {
+        throw new GuliException(111111111, "自定义异常");
     }
 }
