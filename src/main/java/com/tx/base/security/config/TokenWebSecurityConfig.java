@@ -81,7 +81,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest().authenticated()
                 //.and().formLogin().loginProcessingUrl("/index/login")
-                .and().logout().logoutUrl("/index/logout")//退出路径
+                .and().logout().logoutUrl("/admin/logout")//退出路径
                 .addLogoutHandler(new com.tx.base.security.security.TokenLogoutHandler(tokenManager, redisTemplate))
                 .and()
                 .addFilter(new com.tx.base.security.filter.TokenLoginFilter(authenticationManager(), tokenManager, redisTemplate))//添加自定义过滤器
@@ -106,7 +106,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/swagger-resources", "/v2/api-docs", "/webjars/**", "/index/unAuth",
+        web.ignoring().antMatchers("/swagger-resources", "/v2/api-docs", "/webjars/**",
                 "/doc.html", "/admin/user/save", "/admin/user/getVerificationCode");
     }
 }
