@@ -7,7 +7,7 @@ import java.util.Map;
 
 //统一返回结果的类
 @Data
-public class R {
+public class R<T> {
 
     private Boolean success;
 
@@ -15,7 +15,9 @@ public class R {
 
     private String message;
 
-    private Map<String, Object> data = new HashMap<String, Object>();
+    //private Map<String, Object> data = new HashMap<String, Object>();
+
+    private T data;
 
     //把构造方法私有
     private R() {
@@ -39,6 +41,16 @@ public class R {
         return r;
     }
 
+    public static <T> R<T> error(T obj) {
+        R r = new R();
+        r.setSuccess(false);
+        r.setCode(20001);
+        r.setMessage("失败");
+        r.setData(obj);
+        return r;
+    }
+
+
     //失败静态方法
     public static R auhtError() {
         R r = new R();
@@ -47,6 +59,7 @@ public class R {
         r.setMessage("---认证失败---");
         return r;
     }
+
     //失败静态方法
     public static R usernameOrPasswordError(String msg) {
         R r = new R();
@@ -82,12 +95,14 @@ public class R {
     }
 
     public R data(String key, Object value) {
-        this.data.put(key, value);
+        Map<String, Object> data1 = new HashMap<String, Object>();
+        data1.put(key, value);
+        this.data = (T) data1;
         return this;
     }
 
     public R data(Map<String, Object> map) {
-        this.setData(map);
+        this.setData((T) map);
         return this;
     }
 }
