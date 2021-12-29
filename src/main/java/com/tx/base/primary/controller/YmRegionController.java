@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,5 +32,11 @@ public class YmRegionController {
     public R list() {
         List<YmRegion> list = regionService.list(new QueryWrapper<>());
         return R.ok().data("regionList", list);
+    }
+
+    @ApiOperation("新增地区")
+    @PostMapping("/add")
+    public R add(@RequestBody YmRegion ymRegion){
+        return R.ok();
     }
 }

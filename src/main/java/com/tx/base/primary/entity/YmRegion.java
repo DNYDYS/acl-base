@@ -20,7 +20,7 @@ import java.util.Date;
  * @date：2021/12/3 10:43
  * @version：1.0
  */
-@ApiModel(value = "com-tx-base-primary-entity-YmRegion")
+@ApiModel(value = "YmRegion")
 @Data
 @Builder
 @AllArgsConstructor

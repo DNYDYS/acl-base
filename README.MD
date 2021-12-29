@@ -5,7 +5,7 @@
 		<img src="https://img.shields.io/:license-apache-blue.svg" ></img>
 	</a>
 	<a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
-		<img src="https://img.shields.io/badge/JDK-1.8+-green.svg" ></img>
+		<img src="https://img.shields.io/badge/JDK-1.8-green.svg" ></img>
 	</a>
     <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
 		<img src="https://img.shields.io/badge/SpringBoot-2.3.4-blue.svg" ></img>
@@ -20,9 +20,20 @@
 		<img src="https://img.shields.io/badge/Redis-3.0-pink.svg" ></img>
 	</a>
 		<a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
-		<img src="https://img.shields.io/badge/Jwt-jjwt-red.svg" ></img>
+		<img src="https://img.shields.io/badge/Jwt-0.9.1-red.svg" ></img>
 	</a>
 </p>
+
+### 2021-12-29
+
+- 移除swagger-bootstrap-ui组件，引入knife4j文档组件
+- 学习项目，建议有点基础的可以随意自定义相关实现
+- 新增EasyCaptcha验证码组件
+- 新增地区新增接口，验证swagger文档是否生成正确
+- 
+
+
+
 
 ### 2021-12-07
 
