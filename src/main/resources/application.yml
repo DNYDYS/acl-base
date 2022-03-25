@@ -5,9 +5,9 @@ spring:
     name: acl-base
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://10.0.16.6:3306/acl?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password: 123456
+    password: 4amgucun123A
 
   redis:
     host: localhost
