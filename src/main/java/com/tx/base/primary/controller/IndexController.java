@@ -23,7 +23,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("index")
-//@CrossOrigin
 @Api(tags = "首页接口")
 public class IndexController {
 

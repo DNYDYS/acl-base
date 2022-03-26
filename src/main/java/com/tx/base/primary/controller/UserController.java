@@ -31,7 +31,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/admin/user")
-//@CrossOrigin
 @Api(tags = "用户管理")
 public class UserController {
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
