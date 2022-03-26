@@ -113,7 +113,7 @@ public class Result<T> {
     public static Result fail(String msg) {
         Result result = new Result();
         result.setSuccess(false);
-        result.setCode(5001);
+        result.setCode(20001);
         result.setMessage(msg);
         return result;
     }

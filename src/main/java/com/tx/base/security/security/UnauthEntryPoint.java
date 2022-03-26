@@ -1,7 +1,7 @@
 package com.tx.base.security.security;
 
-import com.tx.base.utils.R;
 import com.tx.base.utils.ResponseUtil;
+import com.tx.base.utils.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -19,6 +19,7 @@ public class UnauthEntryPoint implements AuthenticationEntryPoint {
                          AuthenticationException e) throws IOException, ServletException {
         //  直接返回信息
         String message = e.getMessage();
-        ResponseUtil.out(response,R.error().message("未授权统一返回接口"));
+        //ResponseUtil.out(response,R.error().message("未授权统一返回接口"));
+        ResponseUtil.out(response, Result.fail("当前用户登录信息已过期，请重新登录"));
     }
 }
