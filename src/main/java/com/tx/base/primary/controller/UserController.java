@@ -3,21 +3,19 @@ package com.tx.base.primary.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tx.base.primary.entity.User;
 import com.tx.base.utils.R;
+import com.tx.base.utils.Result;
+import com.tx.base.utils.ResultPage;
 import com.wf.captcha.ArithmeticCaptcha;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletResponse;
@@ -47,34 +45,30 @@ public class UserController {
     private RedisTemplate redisTemplate;
 
     @ApiOperation(value = "获取管理用户分页列表")
-    @GetMapping("{page}/{limit}")
-    public R index(
-            @ApiParam(name = "page", value = "当前页码", required = true)
-            @PathVariable Long page,
-
-            @ApiParam(name = "limit", value = "每页记录数", required = true)
-            @PathVariable Long limit,
-
-            @ApiParam(name = "courseQuery", value = "查询对象", required = false)
-                    User userQueryVo) {
-        Page<User> pageParam = new Page<>(page, limit);
-        QueryWrapper<User> wrapper = new QueryWrapper<>();
-        if (!StringUtils.isEmpty(userQueryVo.getUsername())) {
-            wrapper.like("username", userQueryVo.getUsername());
-        }
-
-        IPage<User> pageModel = userService.page(pageParam, wrapper);
-        return R.ok().data("items", pageModel.getRecords()).data("total", pageModel.getTotal());
+    @PostMapping("page")
+    public ResultPage page(@RequestBody User user) {
+        IPage<User> page = userService.findPage(user);
+        return ResultPage.ok(page);
     }
 
     @ApiOperation(value = "新增管理用户")
     @PostMapping("save")
-    public R save(@RequestBody User user) {
+    public Result save(@RequestBody User user) {
+        Boolean b = userService.findByUserName(user);
+        if (b) return Result.fail("当前登录名已存在，请使用其他登录名");
         BCryptPasswordEncoder bp = new BCryptPasswordEncoder();
         user.setPassword(bp.encode(user.getPassword()));
         // 这里要判断用户名是否重复
         userService.save(user);
-        return R.ok();
+        return Result.ok();
+    }
+
+    @ApiOperation("删除")
+    @DeleteMapping("del/{id}")
+    public Result del(@PathVariable String id) {
+        if (id.equals("1")) return Result.fail("超级管理员不能删除");
+        userService.removeById(id);
+        return Result.ok();
     }
 
     @ApiOperation(value = "根据用户获取角色数据")

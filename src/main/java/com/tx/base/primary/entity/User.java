@@ -20,7 +20,7 @@ import java.util.Date;
 @Accessors(chain = true)
 @TableName("acl_user")
 @ApiModel(value = "User对象", description = "用户表")
-public class User implements Serializable {
+public class User extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
