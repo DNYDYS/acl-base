@@ -79,8 +79,8 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(new com.tx.base.security.security.UnauthEntryPoint())//没有权限访问
                 .and().csrf().disable()
                 .authorizeRequests()
-                .anyRequest().permitAll()
-                //.anyRequest().authenticated()
+                //.anyRequest().permitAll()
+                .anyRequest().authenticated()
                 //.and().formLogin().loginProcessingUrl("/index/login")
                 .and().logout().logoutUrl("/admin/logout")//退出路径
                 .addLogoutHandler(new com.tx.base.security.security.TokenLogoutHandler(tokenManager, redisTemplate))
@@ -101,6 +101,7 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
+     *
      * 不进行认证的路径，可以直接访问
      * @param web
      * @throws Exception
@@ -108,6 +109,6 @@ public class TokenWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/swagger-resources", "/v2/api-docs", "/webjars/**",
-                "/doc.html", "/admin/user/save", "/admin/user/getVerificationCode", "/admin/user/getEasyCaptcha", "/emo/**/**","/emo/**/**");
+                "/doc.html", "/admin/user/save", "/admin/user/getVerificationCode", "/admin/user/getEasyCaptcha");
     }
 }

@@ -60,14 +60,14 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
         try {
             //根据流获取表单数据
             User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
-            String captcha = user.getCaptcha();
-            String redisCaptcha = (String) redisTemplate.opsForValue().get("123");
-            logger.info("传进来的验证码：" + captcha);
-            logger.info("redis中存的验证码：" + redisCaptcha);
-            if (!captcha.equals(redisCaptcha)) {
-                //验证码不正确
-                throw new AuthenticationServiceException("用户验证码错误!");
-            }
+            //String captcha = user.getCaptcha();
+            //String redisCaptcha = (String) redisTemplate.opsForValue().get("123");
+            //logger.info("传进来的验证码：" + captcha);
+            //logger.info("redis中存的验证码：" + redisCaptcha);
+            //if (!captcha.equals(redisCaptcha)) {
+            //    //验证码不正确
+            //    throw new AuthenticationServiceException("用户验证码错误!");
+            //}
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>()));
         } catch (IOException e) {
