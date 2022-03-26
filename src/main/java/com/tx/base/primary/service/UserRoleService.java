@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.tx.base.primary.entity.UserRole;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
- * @author testjava
- * @since 2020-01-12
+ * @description: --
+ * @author：Bing
+ * @date：2022/3/26 19:00
+ * @version：1.0
  */
 public interface UserRoleService extends IService<UserRole> {
 

@@ -4,25 +4,22 @@ package com.tx.base.primary.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.tx.base.primary.entity.Role;
 import com.tx.base.primary.service.RoleService;
-import com.tx.base.utils.R;
+import com.tx.base.utils.Result;
 import com.tx.base.utils.ResultPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
- * 前端控制器
- * @author testjava
- * @since 2020-01-12
+ * @description: --
+ * @author：Bing
+ * @date：2022/3/26 19:00
+ * @version：1.0
  */
 @RestController
-@RequestMapping("/admin/role")
+@RequestMapping("role")
 @Api(tags = "角色管理")
-//@CrossOrigin
 public class RoleController {
 
     @Autowired
@@ -37,9 +34,31 @@ public class RoleController {
 
     @ApiOperation(value = "新增角色")
     @PostMapping("save")
-    public R save(@RequestBody Role role) {
+    public Result save(@RequestBody Role role) {
         roleService.save(role);
-        return R.ok();
+        return Result.ok();
+    }
+
+    @ApiOperation(value = "修改")
+    @PutMapping("updateById")
+    public Result updateById(@RequestBody Role role) {
+        if (role.getId() == null) return Result.fail("id不能为空");
+        roleService.updateById(role);
+        return Result.ok();
+    }
+
+    @ApiOperation(value = "根据id查询")
+    @GetMapping("getById/{id}")
+    public Result getById(@PathVariable("id") String id) {
+        Role role = roleService.getById(id);
+        return Result.ok(role);
+    }
+
+    @ApiOperation(value = "根据id删除")
+    @DeleteMapping("delById/{id}")
+    public Result delById(@PathVariable("id") String id) {
+        roleService.removeById(id);
+        return Result.ok();
     }
 }
 

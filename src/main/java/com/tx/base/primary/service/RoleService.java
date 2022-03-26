@@ -8,12 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>
- *  服务类
- * </p>
- *
- * @author testjava
- * @since 2020-01-12
+ * @description: --
+ * @author：Bing
+ * @date：2022/3/26 19:00
+ * @version：1.0
  */
 public interface RoleService extends IService<Role> {
 
@@ -32,3 +30,6 @@ public interface RoleService extends IService<Role> {
      */
     IPage<Role> findpage(Role role);
 }
+
+
+

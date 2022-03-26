@@ -23,25 +23,18 @@ public class DefaultPasswordEncoder implements PasswordEncoder {
     public DefaultPasswordEncoder(int strength) {
     }
 
-    /**
-     * 进行MD5加密
-     * @param charSequence
-     * @return
-     */
     @Override
-    public String encode(CharSequence charSequence) {
-        //使用工具类加密
-        return MD5.encrypt(charSequence.toString());
+    public boolean upgradeEncoding(String encodedPassword) {
+        return PasswordEncoder.super.upgradeEncoding(encodedPassword);
     }
 
-    /**
-     * 进行密码比对
-     * @param charSequence
-     * @param encodedPassword
-     * @return
-     */
     @Override
-    public boolean matches(CharSequence charSequence, String encodedPassword) {
-        return encodedPassword.equals(MD5.encrypt(charSequence.toString()));
+    public String encode(CharSequence charSequence) {
+        return null;
+    }
+
+    @Override
+    public boolean matches(CharSequence charSequence, String s) {
+        return false;
     }
 }

@@ -1,8 +1,8 @@
 package com.tx.base.primary.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.tx.base.primary.entity.AclEmo;
-import com.tx.base.primary.service.AclEmoService;
+import com.tx.base.primary.entity.Post;
+import com.tx.base.primary.service.PostService;
 import com.tx.base.utils.Result;
 import com.tx.base.utils.ResultPage;
 import io.swagger.annotations.Api;
@@ -16,56 +16,59 @@ import java.util.List;
 /**
  * @description: --
  * @author：Bing
- * @date：2022/3/24 15:19
+ * @date：2022/3/26 21:50
  * @version：1.0
  */
 @RestController
-@RequestMapping("emo")
-@Api(tags = "emo接口")
-public class AclEmoController {
-
+@RequestMapping("post")
+@Api(tags = "岗位管理")
+public class PostController {
     @Autowired
-    private AclEmoService aclEmoService;
+    private PostService postService;
 
 
     @GetMapping("list")
     @ApiOperation("查询所有")
     public Result list() {
-        List<AclEmo> list = aclEmoService.findAll();
+        List<Post> list = postService.list();
         return Result.ok(list);
     }
+
     @PostMapping("page")
     @ApiOperation("分页")
-    public ResultPage page(@RequestBody AclEmo aclEmo) {
-        IPage<AclEmo> list = aclEmoService.page(aclEmo);
+    public ResultPage page(@RequestBody Post post) {
+        IPage<Post> list = postService.findBypage(post);
         return ResultPage.ok(list);
     }
+
     @GetMapping("getById/{id}")
     @ApiOperation("根据id查询")
     public Result getById(@PathVariable Integer id) {
-        AclEmo aclEmo = aclEmoService.getById(id);
-        return Result.ok(aclEmo);
+        Post post = postService.getById(id);
+        return Result.ok(post);
     }
 
     @PostMapping("add")
     @ApiOperation("新增")
-    public Result add(@RequestBody AclEmo aclEmo) {
-        if (aclEmo.getText() == null) return Result.fail("emo语句不能为空");
-        aclEmo.setCreateTime(new Date());
-        aclEmoService.save(aclEmo);
+    public Result add(@RequestBody Post post) {
+        post.setCreateTime(new Date());
+        postService.save(post);
         return Result.ok();
     }
-    @PostMapping("updateById")
+
+    @PutMapping("updateById")
     @ApiOperation("修改")
-    public Result updateById(@RequestBody AclEmo aclEmo) {
-        if (aclEmo.getId() == null) return Result.fail("emo语句不能为空");
-        aclEmoService.updateById(aclEmo);
+    public Result updateById(@RequestBody Post post) {
+        if (post.getPostId() == null) return Result.fail("id不能为空");
+        postService.updateById(post);
         return Result.ok();
     }
+
     @ApiOperation("删除")
     @DeleteMapping("del/{id}")
     public Result del(@PathVariable Integer id) {
-        aclEmoService.removeById(id);
+        postService.removeById(id);
         return Result.ok();
     }
 }
+

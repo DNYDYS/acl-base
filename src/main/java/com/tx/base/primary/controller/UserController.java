@@ -84,6 +84,21 @@ public class UserController {
         roleService.saveUserRoleRealtionShip(userId, roleId);
         return R.ok();
     }
+    @ApiOperation(value = "根据id查询")
+    @GetMapping("getById/{id}")
+    public Result getById(@PathVariable("id") String id) {
+        User user = userService.getById(id);
+        return Result.ok(user);
+    }
+
+    @ApiOperation(value = "修改")
+    @PutMapping("updateById")
+    public Result updateById(@RequestBody User user) {
+        if (user.getId() == null) return Result.fail("id不能为空");
+        if (user.getId().equals("1")) return Result.fail("超级管理员不能更新");
+        userService.updateById(user);
+        return Result.ok();
+    }
 
     /**
      * 获取验证码接口
