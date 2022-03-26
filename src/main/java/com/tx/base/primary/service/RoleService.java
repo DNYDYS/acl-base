@@ -1,5 +1,6 @@
 package com.tx.base.primary.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tx.base.primary.entity.Role;
 
@@ -23,4 +24,11 @@ public interface RoleService extends IService<Role> {
     void saveUserRoleRealtionShip(String userId, String[] roleId);
 
     List<Role> selectRoleByUserId(String id);
+
+    /**
+     * 分页查询
+     * @param role
+     * @return
+     */
+    IPage<Role> findpage(Role role);
 }

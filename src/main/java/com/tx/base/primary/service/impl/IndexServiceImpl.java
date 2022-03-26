@@ -57,7 +57,6 @@ public class IndexServiceImpl implements IndexService {
         List<String> permissionValueList = permissionService.selectPermissionValueByUserId(user.getId());
         // 将权限列表放入到redis中
         redisTemplate.opsForValue().set(username, permissionValueList);
-
         result.put("name", user.getUsername());
         result.put("avatar", "xxxx");
         result.put("roles", roleNameList);

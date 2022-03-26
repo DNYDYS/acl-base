@@ -22,7 +22,8 @@ public class TokenManager {
      * token有效时长 单位 毫秒
      * token 过期时间, 单位: 秒. 这个值表示 7 天
      */
-    private long tokenEcpiration = 7 * 24 * 60 * 60 * 1000;
+    //private long tokenEcpiration = 7 * 24 * 60 * 60 * 1000;
+    private long tokenEcpiration = 60 * 60 * 1000;
     /**
      * 编码秘钥 太简单 后期要更改
      */

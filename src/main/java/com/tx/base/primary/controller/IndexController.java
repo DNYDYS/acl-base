@@ -5,6 +5,7 @@ import com.tx.base.exception.GuliException;
 import com.tx.base.primary.service.IndexService;
 import com.tx.base.security.security.TokenManager;
 import com.tx.base.utils.R;
+import com.tx.base.utils.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +36,11 @@ public class IndexController {
      */
     @GetMapping("info")
     @ApiOperation("获取登录用户信息")
-    public R info() {
+    public Result info() {
         //获取当前登录用户用户名
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Map<String, Object> userInfo = indexService.getUserInfo(username);
-        return R.ok().data(userInfo);
+        return Result.ok(userInfo);
     }
 
     /**

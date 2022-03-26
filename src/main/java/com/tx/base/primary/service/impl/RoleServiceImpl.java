@@ -1,6 +1,8 @@
 package com.tx.base.primary.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tx.base.primary.entity.Role;
 import com.tx.base.primary.entity.UserRole;
@@ -85,5 +87,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             roleList = baseMapper.selectBatchIds(roleIdList);
         }
         return roleList;
+    }
+
+    @Override
+    public IPage<Role> findpage(Role role) {
+        IPage<Role> iPage = new Page<>(role.getCurrentPage(), role.getPageSize());
+        return this.page(iPage, new QueryWrapper<Role>().orderByDesc("gmt_create"));
     }
 }
