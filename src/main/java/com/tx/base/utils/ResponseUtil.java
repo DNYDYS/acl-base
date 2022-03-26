@@ -23,12 +23,17 @@ public class ResponseUtil {
         }
     }
 
-    public static void out(HttpServletResponse response, Result r) {
+    /**
+     * 重载方法
+     * @param response
+     * @param result
+     */
+    public static void out(HttpServletResponse response, Result result) {
         ObjectMapper mapper = new ObjectMapper();
         response.setStatus(HttpStatus.OK.value());
         response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         try {
-            mapper.writeValue(response.getWriter(), r);
+            mapper.writeValue(response.getWriter(), result);
         } catch (IOException e) {
             e.printStackTrace();
         }

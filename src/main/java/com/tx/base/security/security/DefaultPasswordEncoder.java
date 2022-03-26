@@ -1,6 +1,5 @@
 package com.tx.base.security.security;
 
-import com.tx.base.utils.MD5;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
