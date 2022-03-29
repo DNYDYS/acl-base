@@ -2,6 +2,7 @@ package com.tx.base.primary.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.tx.base.anno.LogAnnotation;
 import com.tx.base.primary.entity.Role;
 import com.tx.base.primary.service.RoleService;
 import com.tx.base.utils.Result;
@@ -25,6 +26,7 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+    @LogAnnotation("角色管理-分页")
     @PostMapping("page")
     @ApiOperation("分页")
     public ResultPage page(@RequestBody Role role) {

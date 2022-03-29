@@ -1,14 +1,21 @@
 package com.tx.base.security.filter;
 
+import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tx.base.primary.entity.AclLog;
 import com.tx.base.primary.entity.SecurityUser;
 import com.tx.base.primary.entity.User;
+import com.tx.base.primary.service.AclLogService;
+import com.tx.base.primary.service.impl.AclLogServiceImpl;
 import com.tx.base.utils.R;
 import com.tx.base.utils.ResponseUtil;
+import com.tx.base.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -20,6 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 认证自定义过滤器
@@ -27,6 +36,7 @@ import java.util.ArrayList;
 public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
     private static final Logger logger = LoggerFactory.getLogger(TokenLoginFilter.class);
 
+    private AclLogService aclLogService = new AclLogServiceImpl();
     private com.tx.base.security.security.TokenManager tokenManager;
     private RedisTemplate redisTemplate;
     private AuthenticationManager authenticationManager;
@@ -91,14 +101,23 @@ public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter {
             throws IOException, ServletException {
         logger.info("---进入认证成功方法---");
         //认证成功，得到认证成功之后用户信息
+        AclLog aclLog = new AclLog();
+        aclLog.setType("1");
         SecurityUser user = (SecurityUser) authResult.getPrincipal();
+        aclLog.setTitle(user.getUsername());
+        aclLog.setCreateTime(DateUtil.date());
         //根据用户名生成token
         String token = tokenManager.createToken(user.getCurrentUserInfo().getUsername());
         //把用户名称和用户权限列表放到redis
         //key:用户名 value：权限列表
         redisTemplate.opsForValue().set(user.getCurrentUserInfo().getUsername(), user.getPermissionValueList());
         //返回token
-        ResponseUtil.out(response, R.ok().data("token", token));
+        //aclLogService.addLog(aclLog);
+        Map<String, Object> map = new HashMap<>();
+        map.put("token", token);
+        //map.put("username", user.getUsername());
+        map.put("user",user.getCurrentUserInfo());
+        ResponseUtil.out(response, Result.ok(map));
     }
 
     /**
