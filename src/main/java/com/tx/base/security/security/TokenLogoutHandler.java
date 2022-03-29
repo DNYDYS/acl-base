@@ -1,7 +1,7 @@
 package com.tx.base.security.security;
 
-import com.tx.base.utils.R;
 import com.tx.base.utils.ResponseUtil;
+import com.tx.base.utils.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -50,6 +50,6 @@ public class TokenLogoutHandler implements LogoutHandler {
             //从redis删除token key的用户名，value是权限列表
             redisTemplate.delete(username);
         }
-        ResponseUtil.out(response, R.ok());
+        ResponseUtil.out(response, Result.ok());
     }
 }

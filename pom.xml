@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
     <groupId>com.tx.base</groupId>
     <artifactId>acl-base</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -12,28 +18,25 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
-        <mybatis-plus.version>3.5.0</mybatis-plus.version>
-        <!--<swagger.version>2.9.2</swagger.version>-->
-        <fastjson.version>1.2.28</fastjson.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.22</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <scope>provided</scope>
         </dependency>
-        <!--mybatis-plus 持久层-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus.version}</version>
+            <version>3.4.3</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -45,18 +48,6 @@
             <artifactId>druid</artifactId>
             <version>1.2.2</version>
         </dependency>
-        <!--swagger-->
-        <!--<dependency>-->
-        <!--    <groupId>io.springfox</groupId>-->
-        <!--    <artifactId>springfox-swagger2</artifactId>-->
-        <!--    <version>${swagger.version}</version>-->
-        <!--</dependency>-->
-        <!--bootstrap ui依赖-->
-        <!--<dependency>-->
-        <!--    <groupId>com.github.xiaoymin</groupId>-->
-        <!--    <artifactId>swagger-bootstrap-ui</artifactId>-->
-        <!--    <version>1.9.6</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>
@@ -67,7 +58,6 @@
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>3.0.3</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -76,9 +66,8 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
+            <version>1.2.78</version>
         </dependency>
-        <!-- redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -94,7 +83,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
@@ -131,44 +119,19 @@
             </exclusions>
         </dependency>
     </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.4.RELEASE</version>
                 <configuration>
-                    <mainClass>com.tx.base.BaseApplication</mainClass>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

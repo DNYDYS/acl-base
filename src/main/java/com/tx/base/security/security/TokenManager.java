@@ -1,9 +1,9 @@
 package com.tx.base.security.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.CompressionCodecs;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.alibaba.fastjson.JSONObject;
+import com.tx.base.primary.entity.User;
+import io.jsonwebtoken.*;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -22,12 +22,11 @@ public class TokenManager {
      * token有效时长 单位 毫秒
      * token 过期时间, 单位: 秒. 这个值表示 7 天
      */
-    //private long tokenEcpiration = 7 * 24 * 60 * 60 * 1000;
     private long tokenEcpiration = 60 * 60 * 1000;
     /**
      * 编码秘钥 太简单 后期要更改
      */
-    private String tokenSignKey = "weeeeeeeeeeeeessssssssssss";
+    private String tokenSignKey = "acl-admin";
 
     /**
      * 1 使用jwt根据用户名生成token
@@ -88,27 +87,26 @@ public class TokenManager {
                 .getBody();
     }
 
-    ///**
-    // * 验证token是否有效
-    // * @param token
-    // * @return
-    // */
-    //public Boolean validateToken(String token) {
-    //    String userInfo;
-    //    try {
-    //        userInfo = getUserInfoFromToken(token);
-    //    } catch (ExpiredJwtException jwtException) {
-    //        logger.error("token过期:{}", jwtException.getMessage());
-    //        return false;
-    //    }
-    //
-    //    if (StringUtils.isBlank(userInfo)) {
-    //        return false;
-    //    }
-    //    User user = JSONObject.parseObject(userInfo, User.class);
-    //    if (user != null && StringUtils.isBlank(user.getUsername())) {
-    //        return false;
-    //    }
-    //    return true;
-    //}
+    /**
+     * 验证token是否有效
+     * @param token
+     * @return
+     */
+    public Boolean validateToken(String token) {
+        String userInfo;
+        try {
+            userInfo = getUserInfoFromToken(token);
+        } catch (ExpiredJwtException jwtException) {
+            logger.error("token过期:{}", jwtException.getMessage());
+            return false;
+        }
+        if (StringUtils.isBlank(userInfo)) {
+            return false;
+        }
+        User user = JSONObject.parseObject(userInfo, User.class);
+        if (user != null && StringUtils.isBlank(user.getUsername())) {
+            return false;
+        }
+        return true;
+    }
 }

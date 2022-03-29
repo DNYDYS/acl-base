@@ -21,10 +21,4 @@ public class InitBean {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    public static void main(String[] args) {
-        BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
-        String encode = bc.encode("123456");
-        System.out.println(encode);
-    }
 }

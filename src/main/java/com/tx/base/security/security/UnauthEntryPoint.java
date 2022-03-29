@@ -18,8 +18,6 @@ public class UnauthEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException e) throws IOException, ServletException {
         //  直接返回信息
-        String message = e.getMessage();
-        //ResponseUtil.out(response,R.error().message("未授权统一返回接口"));
         ResponseUtil.out(response, Result.fail(50014,"当前用户登录信息已过期，请重新登录"));
     }
 }
