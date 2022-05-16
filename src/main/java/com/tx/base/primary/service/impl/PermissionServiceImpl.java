@@ -41,6 +41,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
 
         QueryWrapper<Permission> wrapper = new QueryWrapper<>();
         wrapper.orderByDesc("id");
+        wrapper.orderByDesc("id");
         List<Permission> permissionList = baseMapper.selectList(wrapper);
 
         List<Permission> result = bulid(permissionList);

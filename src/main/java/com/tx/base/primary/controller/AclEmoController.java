@@ -34,6 +34,9 @@ public class AclEmoController {
         List<AclEmo> list = aclEmoService.findAll();
         return Result.ok(list);
     }
+
+
+
     @PostMapping("page")
     @ApiOperation("分页")
     public ResultPage page(@RequestBody AclEmo aclEmo) {
